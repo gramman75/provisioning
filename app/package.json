@@ -9,13 +9,20 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
+    "vue-router": "^4.0.14",
     "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jquery": "^3.5.14",
+    "@types/lodash": "^4.14.182",
     "@types/webfontloader": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",

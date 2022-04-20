@@ -4,9 +4,9 @@
       background-color="white"
       center-active
     >
-      <v-tab><router-link to="news">News</router-link></v-tab>
-      <v-tab><router-link to="jobs">Jobs</router-link></v-tab>
-      <v-tab><router-link to="ask">Ask</router-link></v-tab>
+      <router-link to="news"><v-tab>News</v-tab></router-link>
+      <router-link to="jobs"><v-tab>Jobs</v-tab></router-link>
+      <router-link to="ask"><v-tab>Ask</v-tab></router-link>
     </v-tabs>
   </v-card>
 </template>

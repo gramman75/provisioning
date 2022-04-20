@@ -13,19 +13,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
 import ToolBar from "./components/ToolBar.vue";
+import _ from "lodash";
 
 export default defineComponent({
   name: "App",
 
   components: {
-    HelloWorld, ToolBar
+    ToolBar
   },
 
   data() {
     return {
-      //
     };
   },
 });
