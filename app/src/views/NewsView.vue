@@ -31,15 +31,29 @@
         <!-- <p>
             <div><span>{{ getCount }}</span></div>
         </p> -->
+
+        <p>{{getComputedTime}}</p>
+        <p>{{getMethodTime()}}</p>
+        <v-container>
+            <v-row>
+                <v-col cols="12" sm="6" md="3">
+                    <v-text-field v-model="fullname"></v-text-field>
+                </v-col>
+            </v-row>
+        </v-container>
+        <p>first name : <span>{{firstname}}</span></p>
+        <p>last name : <span>{{lastname}}</span></p>
+        <p>fullname: <span>{{fullNameCom}}</span></p>
+
     </div>
 </template>
 
 <script lang='ts'>
-import {defineComponent, nextTick } from "vue";
+import {defineComponent} from "vue";
 import User from "../models/User";
 import UserService from "../api/UserService";
 import NewsModel from "@/models/NewsModel";
-import _ from "lodash";
+import _, { get } from "lodash";
 
 export default defineComponent({
     // name: "NEWS",
@@ -50,6 +64,9 @@ export default defineComponent({
 
     data() {
         return {
+            fullname : 'aaa' as string,
+            firstname: String(),
+            lastname: String(),
             seen: Boolean(), 
             counts: Array<number>(),
             lists : Array<String>(),
@@ -68,26 +85,38 @@ export default defineComponent({
     },
     methods : {
         getNews() : void {
-            debugger;
             UserService.getAll().then((response) =>{
                 this.news =  response.data;
             });
 
-       
 
-            let cnt: number = $('#header').children.length;     
+            let cnt = $('#header').children.length;     
 
             // console.log(`cnt : $cnt`);
 
         },
         incrementCount() {
             this.increment++;
+        },
+        getMethodTime() : Number {
+            return this.increment;
         }
     },
 
     computed : {
+        fullNameCom : {
+            get() : String {
+                return `${this.firstname}---${this.lastname}`;
+            },
+            set(fullname : String){
+                [this.firstname, this.lastname] =  fullname.split(' ');
+            }
+        },
         getCount() {
             // return this.increment;
+        },
+        getComputedTime() : Number{
+            return this.increment;
         }
     },
     mounted() {

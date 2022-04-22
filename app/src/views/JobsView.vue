@@ -1,13 +1,26 @@
 <template>
     <div>
-        Jobs 
+        <div></div>
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+
+import {reactive, defineComponent} from 'vue';
+
+export default defineComponent({
+
+    setup() {
+        const state = reactive({
+            count: 0
+        })
+
+        return state;
+    }
+
+
+})
     
-}
 </script>
 
 <style>
