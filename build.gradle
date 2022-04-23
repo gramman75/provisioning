@@ -51,4 +51,4 @@ task buildApp(type: NpmTask, dependsOn: setup){
 	args = ['run', 'build']
 }
 
-processResources.dependsOn 'buildApp'
+//processResources.dependsOn 'buildApp'
