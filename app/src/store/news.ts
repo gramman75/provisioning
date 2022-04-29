@@ -1,25 +1,34 @@
 import NewsService from '@/api/NewsService'
 import NewsModel from '@/models/NewsModel'
+import _ from 'lodash'
 import { defineStore } from 'pinia'
 
 export const useNews = defineStore('news', {
     state : () => {
         return {
            news : Array<NewsModel>(),
-           customNews : Array<NewsModel>()
         }
     },
     getters : {
-        orignNews : (state) => state.news,
+        originNews : (state) => state.news,
         customNews : (state)  =>{
-            state.news.forEach(news => {
-                `custom ${news.title}`
-            })
+            debugger;
+            let c : Array<NewsModel> = [];
+            for(let i = 0 ; i < state.news.length; i++){
+                let newObj:NewsModel = _.cloneDeep(state.news[i]);
+                newObj.title = `custom ${newObj.title}`;
+                c.push(newObj);
+
+            }
+            return c; 
+            
         }
     },
     actions : {
         async getNews() {
-            this.news =  await NewsService.fetchNewsList();
+            let result = await NewsService.fetchNewsList();
+            this.news = result.data;
+            debugger;
         }
     }
 })
