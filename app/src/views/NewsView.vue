@@ -1,157 +1,52 @@
 <template>
-    <div>
-        News
-        <div v-for="count in counts" :key="count">
-            {{count}}
-        </div>
-        <div v-for="list in lists" :key="list">
-            {{list}}
-        </div>
-        
-        <ul v-for="user in users" :key="user.name">
-            <li>{{user.name}}</li>
-        </ul>
-
-       
-
-        <p>html test {{htmltext}}</p>
-        <p>html test <span v-html="htmltext"></span></p>
-
-        <p :id="htmlid">HTML ID</p>
-        <p :class="htmlid">HTML ID</p>
-        <button :disabled="isDisabled">Button</button>
-        <p v-bind="attr">Multi binding</p>
-        <p v-if="seen">Show</p>
-        <a v-bind:href="url">Daum</a>
-        <p><button v-on:click="getNews()">call news</button></p>
-        <ul v-for="n in news" :key="n.id" id="header">
-            <li>{{n.title}}</li>
-        </ul>
-        <v-btn @click="incrementCount()">Increment Count</v-btn>
-        <!-- <p>
-            <div><span>{{ getCount }}</span></div>
-        </p> -->
-
-        <p>{{getComputedTime}}</p>
-        <p>{{getMethodTime()}}</p>
-        <v-container>
-            <v-row>
-                <v-col cols="12" sm="6" md="3">
-                    <v-text-field v-model="fullname"></v-text-field>
-                </v-col>
-            </v-row>
-        </v-container>
-        <p>first name : <span>{{firstname}}</span></p>
-        <p>last name : <span>{{lastname}}</span></p>
-        <p>fullname: <span>{{fullNameCom}}</span></p>
-
-    </div>
+    <!-- <p>{{counter}}</p>
+    <p>{{name}}</p>
+    <p>{{isAdmin}}</p> -->
+    <v-list-item v-for="news in newsStore.orignNews">
+        <v-list-item-content>
+            <v-list-item-title>{{news.title}}</v-list-item-title>
+        </v-list-item-content>
+    </v-list-item>
 </template>
 
-<script lang='ts'>
-import {defineComponent} from "vue";
-import User from "../models/User";
-import UserService from "../api/UserService";
+<script setup lang="ts">
+
+import NewsService from "@/api/NewsService";
+import { reactive, ref } from "vue";
+import { useNews } from '@/store/news';
+import {storeToRefs} from 'pinia'
 import NewsModel from "@/models/NewsModel";
-import _, { get } from "lodash";
 
-export default defineComponent({
-    // name: "NEWS",
+const newsList =  ref<Array<NewsModel>>(); 
+const customNewsList = ref<Array<NewsModel>>();  
+// const icon = reactive({icon : 'mdi-clock'});
 
-    components: {
+const newsStore = useNews();
 
-    },
+// const {counter, isAdmin, name } = storeToRefs(store);
 
-    data() {
-        return {
-            fullname : 'aaa' as string,
-            firstname: String(),
-            lastname: String(),
-            seen: Boolean(), 
-            counts: Array<number>(),
-            lists : Array<String>(),
-            users: Array<User>(),
-            news : Array<NewsModel>(),
-            htmltext : String(),
-            htmlid: String(),
-            isDisabled: Boolean(),
-            attr : {
-                id: 123,
-                class : 'class'
-            },
-            url: String(),
-            increment: Number()
-        };
-    },
-    methods : {
-        getNews() : void {
-            UserService.getAll().then((response) =>{
-                this.news =  response.data;
-            });
+// console.log('store counter :' +store.counter);
 
+function getNews(): void {
+    newsStore.orignNews;
+    // newsList.value = newsStore.orignNews;
+    // customNewsList.value = newsStore.customNews
+    // NewsService.fetchNewsList()
+    //     .then((response) =>{
+    //         newsList.value = response.data;
+    //         console.log(newsList.value);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // NewsService.fetchNewsList();
 
-            let cnt = $('#header').children.length;     
+}
 
-            // console.log(`cnt : $cnt`);
-
-        },
-        incrementCount() {
-            this.increment++;
-        },
-        getMethodTime() : Number {
-            return this.increment;
-        }
-    },
-
-    computed : {
-        fullNameCom : {
-            get() : String {
-                return `${this.firstname}---${this.lastname}`;
-            },
-            set(fullname : String){
-                [this.firstname, this.lastname] =  fullname.split(' ');
-            }
-        },
-        getCount() {
-            // return this.increment;
-        },
-        getComputedTime() : Number{
-            return this.increment;
-        }
-    },
-    mounted() {
-        this.url = "https://www.daum.net"; 
-        this.seen = true;
-        this.isDisabled = false;
-        this.htmlid = "htmlid";
-        this.htmltext = "<B>HI</B>";
-        let a : number[] = [1,2,3, 4];
-        this.counts = a;
-        this.lists = ['a','b','c']
-        let u1: User = {
-            name: 'kim',
-            age: 20
-        }
-        let u2: User = {
-            name: 'lee',
-            age: 20
-        }
-        this.users.push(u1);
-        this.users.push(u2);
-
-        // UserService.getAll().then((response) =>{
-        //     this.news =  response.data;
-        // })
-
-        
-
-  }
-
-});
-
+getNews();
 
 </script>
 
-<style>
+<style scoped>
 
 </style>

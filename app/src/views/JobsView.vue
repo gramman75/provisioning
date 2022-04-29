@@ -1,28 +1,35 @@
 <template>
     <div>
-        <div></div>
+        <v-list-item v-for="jobs in jobsList">
+            <v-list-item-content>
+                <v-list-item-title>{{jobs.title}}</v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+
     </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import JobService from '@/api/JobService';
+import { ref } from 'vue';
 
-import {reactive, defineComponent} from 'vue';
+const jobsList = ref<Array<any>>();
 
-export default defineComponent({
-
-    setup() {
-        const state = reactive({
-            count: 0
+function getJobs() {
+    JobService.fetchJobsList()
+        .then((response)=>{
+            jobsList.value = response.data;
         })
+        .catch((error) =>{
+            console.log(error);
 
-        return state;
-    }
+        })
+}
 
+getJobs();
 
-})
-    
 </script>
 
-<style>
+<style scoped>
 
 </style>

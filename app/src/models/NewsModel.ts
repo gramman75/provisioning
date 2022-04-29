@@ -1,6 +1,12 @@
 export default interface NewsModel {
+    comments_count: number,
+    domain: string,
     id: number,
-    title: String,
-    url: String,
-    time: Date
+    points: number,
+    time: number,
+    time_ago: string,
+    title: string,
+    type: string,
+    url: string,
+    user: string
 }

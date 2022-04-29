@@ -4,9 +4,7 @@
       <tool-bar class="abc"/>
     </v-app-bar>
     <v-main>
-      <v-card height="200px">
         <router-view/>
-      </v-card>
     </v-main>
   </v-app>
 </template>
