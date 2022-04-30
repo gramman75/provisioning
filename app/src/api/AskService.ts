@@ -1,8 +1,9 @@
 import axios from "axios";
+import HackerNewsService from "./HackerNewsService";
 
-class AskService {
-    fetchAskList() : Promise<any> {
-        return axios.get(process.env.VUE_APP_BASE_URL +'/jobs/1.json');
+class AskService extends HackerNewsService{
+    fetchList() : Promise<any> {
+        return axios.get(process.env.VUE_APP_BASE_URL +'/ask/1.json');
     }
 }
 

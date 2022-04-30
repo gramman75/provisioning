@@ -10,13 +10,12 @@ export const useNews = defineStore('news', {
         }
     },
     getters : {
-        originNews : (state) => state.news,
-        customNews : (state)  =>{
-            debugger;
+        getNews : (state) => state.news,
+        getPrefixNews: ( {news})  =>{
             let c : Array<NewsModel> = [];
-            for(let i = 0 ; i < state.news.length; i++){
-                let newObj:NewsModel = _.cloneDeep(state.news[i]);
-                newObj.title = `custom ${newObj.title}`;
+            for(let i = 0 ; i < news.length; i++){
+                let newObj:NewsModel = _.cloneDeep(news[i]);
+                newObj.title = NewsService.setTitlePrefix(newObj.type, newObj.title); 
                 c.push(newObj);
 
             }
@@ -25,10 +24,43 @@ export const useNews = defineStore('news', {
         }
     },
     actions : {
-        async getNews() {
-            let result = await NewsService.fetchNewsList();
+        async findAll() {
+            let result = await NewsService.fetchList();
             this.news = result.data;
+            return this.news;
+        },
+        findByTitle(title: string) : Array<NewsModel>{
+
             debugger;
+            let filteredNews = this.news.filter(news =>{
+                news.title.includes(title)
+            })
+
+            return filteredNews;
         }
     }
 })
+
+// const unsubscribe = useNews().$onAction(
+//     ({
+//         name, store, args, after, onError
+//     }) => {
+//         const startTime = Date.now()
+//         console.log(`Start "${name}" with params [${args.join(', ')}].`)
+
+//         after((result) => {
+//         console.log(
+//             `Finished "${name}" after ${
+//             Date.now() - startTime
+//             }ms.\nResult: ${result}.`
+//         )
+//         })
+
+//         // this will trigger if the action throws or returns a promise that rejects
+//         onError((error) => {
+//             console.warn(
+//                 `Failed "${name}" after ${Date.now() - startTime}ms.\nError: ${error}.`
+//             )
+//         })
+//     }
+// )
