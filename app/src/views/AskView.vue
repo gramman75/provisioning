@@ -1,7 +1,8 @@
 <template>
-    <v-list-item v-for="ask in askStore.getPrefixAsk">
+    <v-list-item two-line v-for="ask in askStore.getPrefixAsk">
         <v-list-item-content>
-            <v-list-item-title>{{ask.title}}</v-list-item-title>
+            <v-list-item-title><a :href="ask.url">{{ask.title}}</a></v-list-item-title>
+            <v-list-item-subtitle>{{ask.user}}</v-list-item-subtitle>
         </v-list-item-content>
     </v-list-item>
 </template>

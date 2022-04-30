@@ -1,15 +1,13 @@
+import UserModel from "@/models/UserModel";
 import axios, {Axios} from "axios";
 import _ from "lodash";
-import TopObject from "./TopObject";
+import HackerNewsService from "./HackerNewsService";
 
-class UserService extends TopObject{
-    getAll(): Promise<any> {
-        return axios.get('https://api.hnpwa.com/v0/jobs/1.json');
+class UserService {
+    getUser(name: String | String[]): Promise<any> {
+        return axios.get(`${process.env.VUE_APP_BASE_URL}/user/${name}.json`);
     }
 
-    getTemplate(param: String): string {
-        return ""; 
-    }
 }
 
 export default new UserService();

@@ -29,14 +29,23 @@ export const useNews = defineStore('news', {
             this.news = result.data;
             return this.news;
         },
-        findByTitle(title: string) : Array<NewsModel>{
+        findByTitle(searchStr: string) {
 
-            debugger;
-            let filteredNews = this.news.filter(news =>{
-                news.title.includes(title)
-            })
+            // let filteredNews : Array<any> = _.filter(this.news, (news) => {
+            //     news.title.includes(title);
+            // })
 
-            return filteredNews;
+            let filteredNews : Array<any> = [];
+
+            for(let i = 0; i < this.news.length; i++){
+                if ( this.news[i].title.includes(searchStr))
+                {
+                    filteredNews.push(this.news[i])
+                }
+            }
+            
+            this.news = filteredNews;
+
         }
     }
 })

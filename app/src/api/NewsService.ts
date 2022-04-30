@@ -1,6 +1,4 @@
-import NewsModel from "@/models/NewsModel";
 import axios from "axios";
-import {storeToRefs} from 'pinia'
 import HackerNewsService from "./HackerNewsService";
 class NewsService extends HackerNewsService{
 

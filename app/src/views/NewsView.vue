@@ -1,8 +1,9 @@
 <template>
     <input v-on:input="search" v-model="searchStr" type="input" />
-    <v-list-item v-for="n in newsStore.getPrefixNews">
+    <v-list-item two-line v-for="n in newsStore.$state.news">
         <v-list-item-content>
-            <v-list-item-title>{{n.title}}</v-list-item-title>
+            <v-list-item-title><a v-bind:href="n.url">{{n.title}}</a></v-list-item-title>
+            <v-list-item-subtitle><router-link :to="`/user/${n.user}`">{{n.user}}</router-link></v-list-item-subtitle>
         </v-list-item-content>
     </v-list-item>
 </template>
@@ -20,7 +21,7 @@ newsStore.findAll();
 
 function search(event: Event) {
     const v = event.target as HTMLInputElement
-    filterNews = newsStore.findByTitle(v.value);
+    newsStore.findByTitle(v.value);
     console.log(v.value)
 }
 
