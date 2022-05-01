@@ -4,7 +4,9 @@
       <tool-bar class="abc"/>
     </v-app-bar>
     <v-main>
-        <router-view/>
+        <transition name="page">
+          <router-view/>
+        </transition>
     </v-main>
   </v-app>
 </template>
@@ -27,3 +29,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+</style>
