@@ -1,12 +1,4 @@
-export default interface AskModel {
-    comments_count: number,
-    domain: string,
-    id: number,
-    points: number,
-    time: number,
-    time_ago: string,
-    title: string,
-    type: string,
-    url: string,
-    user: string
+import ListModel from "./ListModel";
+
+export default interface AskModel extends ListModel{
 }

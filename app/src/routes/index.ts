@@ -15,22 +15,27 @@ const router  = createRouter({
         },
         {
             path:'/news',
+            name: 'news',
             component: Newview,
         },
         {
             path:'/ask',
+            name: 'ask',
             component: AskView,
         },
         {
             path:'/jobs',
+            name: 'jobs',
             component: JobsView,
         },
         {
             path: '/user/:id',
+            name: 'user',
             component: UserView,
         },
         {
             path: '/item/:id',
+            name: 'item',
             component: ItemView,
         }
 
