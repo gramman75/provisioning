@@ -1,28 +1,29 @@
 <template>
-    <v-row>
-        <v-col :cols="5 ">
-        <v-card
-            class="mx-auto"
+    <v-card class=""
             max-width="344"
-        >
-            <v-card-text>
-            <div>ID</div>
-            <p class="text-h4 text--primary">
-                {{userInfo.id}}
-            </p>
-            <p>가입일</p>
-            <div class="text--primary">
-            {{userInfo.created}}
-            </div>
-            <div class="text--primary">
-            {{logOnDate}}
-            </div>
-            </v-card-text>
-            
-        </v-card>
+            outlined>
+            <v-list-item>
+                <v-list-item-avatar>
+                    <font-awesome-icon icon="user" class="fa-2xl" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                    <div>
+                        <router-link :to="`/user/${user.id}`">{{user.id}}</router-link>
 
-        </v-col>
-    </v-row>
+                    </div>
+                    <v-list-item-title>
+                        {{user.created}}
+
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                        point {{user.karma}}
+
+                    </v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
+
+
+        </v-card>
   
 </template>
 
@@ -32,21 +33,22 @@ import { computed, PropType } from 'vue';
 import moment from 'moment'
 
 
-const props = defineProps({
-    userInfo : { type:  Object as PropType<UserModel>, required: true}
-})
+
 // import { useRouter } from 'vue-router';
-// import { useUser } from '@/store/user';
+import { useUser } from '@/store/user';
 // import { computed } from 'vue';
 // import  moment from 'moment';
 
 // const route = useRouter();
-// const userStore = useUser(); 
+const userStore = useUser(); 
+// const props = defineProps({
+//     user : { type:  {} as PropType<UserModel>, required: true}
+// })
 
-// userStore.findUser(route.currentRoute.value.params.id);
-const logOnDate = computed(()=> moment(props.userInfo.created_time).format('L') )
+// userStore.findUser(props.user);
+// const logOnDate = computed(()=> moment(props.user.created_time).format('L') )
 
-
+const user = computed(()=> userStore.getUserInfo)
 </script>
 
 <style>

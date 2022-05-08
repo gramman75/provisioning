@@ -4,12 +4,13 @@
 
 <script setup lang="ts">
 import { useAsk } from '@/store/ask';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import ListView from './ListView.vue'
 
 const askStore = useAsk();
 askStore.findAll();
-const list = ref(askStore.getAsk).value;
+const list = computed(()=> askStore.getAsk);
+// const list = ref(askStore.getAsk).value;
 </script>
 
 <style scoped>

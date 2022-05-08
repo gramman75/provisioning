@@ -5,7 +5,7 @@ export const useUser = defineStore('user', {
     state: ()=> {
         return {
             //NOTE: state에서 Tyep지정 방법
-            userInfo: undefined as UserModel | undefined
+            userInfo: {} as UserModel 
         }
     },
     getters : {
@@ -13,7 +13,7 @@ export const useUser = defineStore('user', {
 
     },
     actions: {
-        async findUser(userName: string | string[]) {
+        async findUser(userName: String) {
             let result =  await UserService.getUser(userName);
             this.userInfo = result.data;
         }

@@ -1,8 +1,18 @@
 <template>
-    <v-list-item two-line v-for="ask in list">
+    <v-list-item two-line v-for="item in list">
         <v-list-item-content>
-            <v-list-item-title><router-link :to="`/item/${ask.id}`">{{ask.title}}</router-link></v-list-item-title>
-            <v-list-item-subtitle>{{ask.user}}</v-list-item-subtitle>
+            <template v-if="item.domain">
+                <v-list-item-title><a v-bind:href="item.url">{{item.title}}</a></v-list-item-title>
+            </template>
+            <template v-else>
+                <v-list-item-title><router-link :to="`/item/${item.id}`">{{item.title}}</router-link></v-list-item-title>
+            </template>
+            <template v-if="item.user">
+                <v-list-item-subtitle>{{`${item.time_ago} by `}}<router-link :to="`/user/${item.user}`">{{item.user}}</router-link></v-list-item-subtitle>
+            </template>
+            <template v-else>
+                <v-list-item-subtitle>{{`${item.time_ago} by `}}<a v-bind:href="item.url">{{item.domain}}</a></v-list-item-subtitle>
+            </template>
         </v-list-item-content>
     </v-list-item>
 </template>
