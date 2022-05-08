@@ -1,30 +1,15 @@
 <template>
-        <!-- <v-row>
-        <v-col :cols="5 ">
-        <v-card
-            class="mx-auto"
-            max-width="344"
-        >
-            <v-card-text>
-            <div>ID</div>
-            <p class="text-h4 text--primary">
-                {{user.id}}
-            </p>
-            <p>가입일</p>
-            <div class="text--primary">
-            {{user.created}}
-            </div>
-            <div class="text--primary">
+    <user-profile>
+        <template #username>
+            <div> {{user.id}} </div>
+        </template>
+        <template v-slot:time>
             {{logOnDate}}
-            </div>
-            </v-card-text>
-            
-        </v-card>
-
-        </v-col>
-    </v-row> -->
-
-    <user-profile></user-profile>
+        </template>
+        <template #karma>
+            <div>{{user.karma}}</div>
+        </template>
+    </user-profile>
   
 </template>
 

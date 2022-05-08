@@ -1,34 +1,18 @@
 <template>
 <v-container>
     <section>
-        <user-profile></user-profile>  
-        <!-- <v-card class=""
-            max-width="344"
-            outlined>
-            <v-list-item>
-                <v-list-item-avatar>
-                    <font-awesome-icon icon="user" class="fa-2xl" />
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <div>
-                        <router-link :to="`/user/${item.user}`">{{item.user}}</router-link>
-
-                    </div>
-                    <v-list-item-title>
-                        {{item.time_ago}}
-
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                        point {{item.points}}
-
-                    </v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-
-
-        </v-card> -->
+        <user-profile>
+            <template #username>
+                <div>
+                    <router-link :to="`/user/${item.user}`">{{item.user}}</router-link>
+                </div>
+            </template>
+            <template #time>
+                {{item.time_ago}}
+            </template>
+        </user-profile>  
         <div >
-            <v-icon
+        <v-icon
           large
           color="orange darken-2"
         >

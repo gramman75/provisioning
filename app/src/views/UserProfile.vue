@@ -7,17 +7,12 @@
                     <font-awesome-icon icon="user" class="fa-2xl" />
                 </v-list-item-avatar>
                 <v-list-item-content>
-                    <div>
-                        <router-link :to="`/user/${user.id}`">{{user.id}}</router-link>
-
-                    </div>
+                    <slot name="username"></slot>
                     <v-list-item-title>
-                        {{user.created}}
-
+                        <slot name="time"></slot>
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        point {{user.karma}}
-
+                        <slot name="karma"></slot>
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
