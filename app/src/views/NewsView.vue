@@ -1,22 +1,24 @@
 <template>
     <list-view :list="list"></list-view>
-     <!-- <v-list-item two-line v-for="ask in newsStore.getNews">
-        <v-list-item-content>
-            <v-list-item-title><router-link :to="`/item/${ask.id}`">{{ask.title}}</router-link></v-list-item-title>
-            <v-list-item-subtitle>{{ask.user}}</v-list-item-subtitle>
-        </v-list-item-content>
-    </v-list-item> -->
+    <!-- <spinner :loading="loading"></spinner> -->
+    
 </template>
 
 <script setup lang="ts">
 import { useNews} from '@/store/news';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import ListView from './ListView.vue'
+import {useMain} from '@/store/main';
 
 const newsStore = useNews();
+const mainStore = useMain();
+mainStore.startSpinner();
 newsStore.findAll();
 const list = computed(()=> newsStore.getNews);
-// const list = ref(newsStore.getNews).value;
+setInterval(()=>{
+    mainStore.stopSpinnger();
+}, 2000)
+
 </script>
 
 <style scoped>

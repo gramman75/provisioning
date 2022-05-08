@@ -1,33 +1,25 @@
 <template>
- <v-app>
-    <v-app-bar color="grey-lighten-2">
-      <tool-bar class="abc"/>
-    </v-app-bar>
-    <v-main>
-        <transition name="page">
-          <router-view/>
-        </transition>
-    </v-main>
-  </v-app>
+   <Spinner :loading="loadingStatus"></Spinner>
+  <v-app>
+      <v-app-bar color="grey-lighten-2">
+        <tool-bar class="abc"/>
+      </v-app-bar>
+      <v-main>
+          <transition name="page">
+            <router-view/>
+          </transition>
+      </v-main>
+    </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import ToolBar from "./components/ToolBar.vue";
-import _ from "lodash";
+import Spinner from "./components/Spinner.vue";
+import {useMain} from '@/store/main';
+import { computed } from "vue";
 
-export default defineComponent({
-  name: "App",
-
-  components: {
-    ToolBar
-  },
-
-  data() {
-    return {
-    };
-  },
-});
+const mainStore = useMain();
+const loadingStatus = computed(()=> mainStore.getLoadingStatus)
 </script>
 
 <style>
