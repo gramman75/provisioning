@@ -16,10 +16,27 @@
 import ToolBar from "./components/ToolBar.vue";
 import Spinner from "./components/Spinner.vue";
 import {useMain} from '@/store/main';
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import mitt from 'mitt'
 
+
+const emitter = mitt<Events>();
+type Events = {
+    'startLoading' : void;
+    'stopLoading' : void;
+}
 const mainStore = useMain();
 const loadingStatus = computed(()=> mainStore.getLoadingStatus)
+// let loadingStatus = ref(Boolean())
+// emitter.on('startLoading', ()=>{
+//   loadingStatus.value = true;
+
+// });
+// emitter.on('stopLoading', ()=>{
+//   loadingStatus.value = false;
+
+// });
+
 </script>
 
 <style>

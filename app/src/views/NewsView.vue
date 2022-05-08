@@ -15,7 +15,7 @@ const mainStore = useMain();
 mainStore.startSpinner();
 newsStore.findAll();
 const list = computed(()=> newsStore.getNews);
-setInterval(()=>{
+setTimeout(()=>{
     mainStore.stopSpinnger();
 }, 2000)
 

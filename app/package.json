@@ -17,6 +17,7 @@
     "core-js": "^3.8.3",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
+    "mitt": "^3.0.0",
     "moment": "^2.29.3",
     "pinia": "^2.0.13",
     "roboto-fontface": "*",

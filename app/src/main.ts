@@ -8,14 +8,18 @@ import { loadFonts } from "./plugins/webfontloader";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import mitt from 'mitt';
 library.add(faUserSecret, faUser)
 
 loadFonts();
+const emitter = mitt();
 
-createApp(App)
-    .use(router)
+const app = createApp(App);
+app.config.globalProperties.emitter = emitter;
+app.config.globalProperties.msg = 'hello'
+
+app.use(router)
     .use(vuetify)
     .use(createPinia())
     .component('font-awesome-icon', FontAwesomeIcon)
-    // .use(store, key)
     .mount("#app");
