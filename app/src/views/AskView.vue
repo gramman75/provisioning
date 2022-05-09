@@ -6,17 +6,20 @@
 import { useAsk } from '@/store/ask';
 import { computed, onMounted, ref, getCurrentInstance, ComponentPublicInstance } from 'vue';
 import ListView from './ListView.vue'
-import mitt from 'mitt';
+// import useEmitter from '@/bus/useEmmiter'  
+import {useMain} from '@/store/main'
 
-    // const  proxy = getCurrentInstance()?.proxy;
 
+// const emitter = useEmitter()   
 const askStore = useAsk();
+const mainStore = useMain();
 
 // emitter.emit('startLoading');
-askStore.findAll();
-// setTimeout(() =>{
-//     emitter.emit('stopLoading')}
-//     ,2000);
+mainStore.startSpinner();
+askStore.findAll().then(()=>{
+    mainStore.stopSpinnger();
+})
+
 const list = computed(()=> askStore.getAsk);
 
 

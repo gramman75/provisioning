@@ -6,11 +6,16 @@
 import { useJobs } from '@/store/jobs';
 import { computed, ref } from 'vue';
 import ListView from './ListView.vue'
+import {useMain} from '@/store/main';
 
 const jobsStore = useJobs();
-jobsStore.findAll();
+
+const mainStore = useMain();
+mainStore.startSpinner();
+jobsStore.findAll().then(()=>{
+    mainStore.stopSpinnger();
+});
 const list = computed(()=> jobsStore.getJobs);
-// const list = ref(jobsStore.getJobs).value;
 </script>
 
 <style scoped>

@@ -13,11 +13,10 @@ import {useMain} from '@/store/main';
 const newsStore = useNews();
 const mainStore = useMain();
 mainStore.startSpinner();
-newsStore.findAll();
-const list = computed(()=> newsStore.getNews);
-setTimeout(()=>{
+newsStore.findAll().then(() => {
     mainStore.stopSpinnger();
-}, 2000)
+});
+const list = computed(()=> newsStore.getNews);
 
 </script>
 

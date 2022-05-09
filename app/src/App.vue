@@ -17,14 +17,14 @@ import ToolBar from "./components/ToolBar.vue";
 import Spinner from "./components/Spinner.vue";
 import {useMain} from '@/store/main';
 import { computed, ref } from "vue";
-import mitt from 'mitt'
+import useEmitter from '@/bus/useEmmiter'  
 
-
-const emitter = mitt<Events>();
+const emitter = useEmitter()   
 type Events = {
     'startLoading' : void;
     'stopLoading' : void;
 }
+
 const mainStore = useMain();
 const loadingStatus = computed(()=> mainStore.getLoadingStatus)
 // let loadingStatus = ref(Boolean())

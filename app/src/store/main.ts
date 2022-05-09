@@ -18,3 +18,4 @@ export const useMain = defineStore('main', {
         }
     }
 })
+// Event bus대신 store를 이용하여 구현.(권장)
