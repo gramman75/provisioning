@@ -20,10 +20,14 @@
 
 <script setup lang="ts">
 import ListModel from '@/models/ListModel';
-import { PropType } from 'vue';
+import { useList } from '@/store/list';
+import { computed, PropType } from 'vue';
+import { useLink } from 'vue-router';
 
-const prop = defineProps({
-    list : {type: Array as PropType<Array<ListModel>> }
-})
+// const prop = defineProps({
+//     list : {type: Array as PropType<Array<ListModel>> }
+// })
+const listStore = useList();
+const list = computed(()=> listStore.getList )
 
 </script>
